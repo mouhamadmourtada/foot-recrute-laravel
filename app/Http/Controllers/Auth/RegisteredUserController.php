@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+        $user = new User();
         return view('auth.register');
     }
 
@@ -39,6 +40,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            // 'prenom' => $request->prenom,
             'password' => Hash::make($request->password),
         ]);
 
