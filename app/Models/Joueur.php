@@ -18,4 +18,9 @@ class Joueur extends Model
     {
         return $this->hasOne(CriterePhysique::class);
     }
+
+    public function recruteurs()
+    {
+        return $this->belongsToMany(Recruteur::class, 'recruteur_joueur');
+    }
 }
