@@ -6,21 +6,29 @@
             <div class="card-header">
                 <h5 class="card-title">Détails du Recruteur</h5>
             </div>
-            <div class="card-body">
-                <div class="row">
+            <div class="card-body infoCentre">
+                <style>
+                    .infoCentre strong{
+                        color : #947653;
+                    }
+                    .infoCentre i{
+                        margin-right: 10px;
+                    }
+                </style>
+                <div class="row"style="font-size: 13px">
                     <div class="col-md-6">
                         <p><strong>Nom du Recruteur:</strong> {{ $recruteur->nomRecruteur }}</p>
                         <p><strong>Prénom du Recruteur:</strong> {{ $recruteur->prenomRecruteur }}</p>
-                        <p><strong>Adresse du Recruteur:</strong> {{ $recruteur->adresseRecruteur }}</p>
-                        <p><strong>Email du Recruteur:</strong> {{ $recruteur->mailRecruteur }}</p>
+                        <p><strong><i class="bi bi-geo-alt"></i>Adresse du Recruteur:</strong> {{ $recruteur->adresseRecruteur }}</p>
+                        <p><strong><i class="bi bi-envelope-check"></i>Email du Recruteur:</strong> {{ $recruteur->mailRecruteur }}</p>
                         <p><strong>Prestige:</strong> {{ $recruteur->prestige }}</p>
+                    </div>
+                    <div class="col-md-6">
                         <p><strong>Valide:</strong> {{ $recruteur->estValide ? 'Oui' : 'Non' }}</p>
                         <p><strong>État:</strong> {{ $recruteur->etat }}</p>
                         <p><strong>Structure:</strong> {{ $recruteur->structure }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Date de Création:</strong> {{ $recruteur->created_at }}</p>
-                        <p><strong>Dernière mise à jour:</strong> {{ $recruteur->updated_at }}</p>
+                        <p><strong><i class="bi bi-calendar"></i>Date de Création:</strong> {{ $recruteur->created_at }}</p>
+                        <p><strong><i class="bi bi-calendar"></i>Dernière mise à jour:</strong> {{ $recruteur->updated_at }}</p>
                     </div>
                 </div>
             </div>

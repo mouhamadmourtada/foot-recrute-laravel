@@ -144,7 +144,7 @@
                                         <p class="mb-0">Tél</p>
                                     </div>
                                     <div class="col-sm-6 text-secondary">
-                                       {{$joueur->centreFormation->telephoneCenter }}
+                                       {{$joueur->centreFormation->telephoneCentre }}
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="mb-0"> Email</p>

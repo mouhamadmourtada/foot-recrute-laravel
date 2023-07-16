@@ -10,7 +10,7 @@
         </div>
         @endif
 
-        <form action="{{ route('admin.centre.update',$centre->id) }}" method="POST" enctype="multipart/form-data">
+        {{-- <form action="{{ route('admin.centre.update',$centre->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -73,7 +73,51 @@
                 </div>
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
+        </form> --}}
+        <form action="{{ route('admin.centre.update', $centre->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+        
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="card px-1">
+                        <div class="form-group">
+                            <x-input-form-crud name="nomCentre" label="Nom du Centre" type="text" placeholder="Nom du Centre" :value="$centre->nomCentre" />
+                        </div>
+                        <div class="form-group">
+                            <x-input-form-crud name="adresseCentre" label="Adresse" type="text" placeholder="Adresse du Centre" :value="$centre->adresseCentre" />
+                        </div>
+                        <div class="form-group">
+                            <x-input-form-crud name="mailCentre" label="Email" type="email" placeholder="Email du Centre" :value="$centre->mailCentre" />
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col">
+                    <div class="card px-1">
+                        <div class="form-group">
+                            <x-input-form-crud name="telephoneCentre" label="Téléphone" type="text" placeholder="Téléphone du Centre" :value="$centre->telephoneCentre" />
+                        </div>
+                        <x-my-select value="{{ $centre->estInternation }}" :options="[
+                            ['value' => '0', 'label' => 'NON'],
+                            ['value' => '1', 'label' => 'OUI'],
+                        ]" 
+                        label="Est International" name="estInternation"></x-my-select>
+                        <div class="form-group">
+                            <x-input-form-crud name="dateFondation" label="Date de fondation" type="date" :value="$centre->dateFondation" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div style="text-align: right;">
+                <button type="submit" class="btn m-3" style="background-color: #124158; color : white;">
+                    <i class="bi bi-check-all"></i>
+                    Enregistrer
+                </button>
+            </div>
         </form>
+        
     </div>
 @endsection
 

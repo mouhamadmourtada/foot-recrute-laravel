@@ -7,11 +7,17 @@
     
       <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
     
-      <x-md-input name="email" label="Login" type="text" messages="$errors->get('email')"/>
-      <x-input-error :messages="$errors->get('{{ $email }}')" class="mt-2" />
+      {{-- <x-md-input name="email" label="Login" type="text" messages="$errors->get('email')">
+        <x-input-error :messages="$errors->get('{{ $email }}')" class="mt-2" />
+      </x-md-input> --}}
+      <x-md-input name="email" label="Login" type="text" :messages="$errors->get('email')">
+        {{-- Autres éléments à inclure --}}
+      </x-md-input>
+    
 
-      <x-md-input name="password" label="Mot de passe" type="password"/>
-      <x-input-error :messages="$errors->get('{{ $password }}')" class="mt-2" />
+      <x-md-input name="password" label="Mot de passe" type="password" :messages="$errors->get('password')">
+        {{-- <x-input-error :messages="$errors->get('{{ $password }}')" class="mt-2" /> --}}
+      </x-md-input>
 
 
       {{-- <div class="form-outline mb-4">

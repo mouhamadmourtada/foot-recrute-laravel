@@ -9,182 +9,231 @@
         </div>
         @endif
 
-        <form action="{{ route('admin.joueur.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="mdForm" action="{{ route('admin.joueur.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            
+            
+            {{-- row principal --}}
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Mail du Joueur:</strong>
-                        <input type="text" name="mailJoueur" class="form-control" placeholder="Mail du Joueur">
-                        @error('mailJoueur')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Poste:</strong>
-                        <select name="poste" class="form-control">
-                            <option value="DC">Défenseur Central</option>
-                            <option value="DLD">Défenseur Latéral Droit</option>
-                            <option value="DLG">Défenseur Latéral Gauche</option>
-                            <option value="MC">Milieu Central</option>
-                            <option value="MD">Milieu Droit</option>
-                            <option value="MG">Milieu Gauche</option>
-                            <option value="MO">Milieu Offensif</option>
-                            <option value="MOC">Milieu Offensif Central</option>
-                            <option value="AG">Attaquant Gauche</option>
-                            <option value="AD">Attaquant Droit</option>
-                            <option value="AP">Attaquant Pointe</option>
-                            <option value="G">Gardien</option>
-                        </select>
-                        @error('poste')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Nom du Joueur:</strong>
-                        <input type="text" name="nomJoueur" class="form-control" placeholder="Nom du Joueur">
-                        @error('nomJoueur')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Prénom du Joueur:</strong>
-                        <input type="text" name="prenomJoueur" class="form-control" placeholder="Prénom du Joueur">
-                        @error('prenomJoueur')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Adresse du Joueur:</strong>
-                        <input type="text" name="adresseJoueur" class="form-control" placeholder="Adresse du Joueur">
-                        @error('adresseJoueur')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Est Valide:</strong>
-                        <select name="estValide" class="form-control">
-                            <option value="0">Non</option>
-                            <option value="1">Oui</option>
-                        </select>
-                        @error('estValide')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Lieu de Naissance:</strong>
-                        <input type="text" name="lieuNaissance" class="form-control" placeholder="Lieu de Naissance">
-                        @error('lieuNaissance')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Date de Naissance:</strong>
-                        <input type="date" name="dateNaissance" class="form-control" placeholder="Date de Naissance">
-                        @error('dateNaissance')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Centre de Formation:</strong>
-                        <select name="centre_formation_id" class="form-control">
-                            <option value="">Sélectionner un centre de formation</option>
-                            @foreach ($centresFormation as $centre)
-                                <option value="{{ $centre->id }}">{{ $centre->nomCentre }}</option>
-                            @endforeach
-                        </select>
-                        @error('centre_formation_id')
-                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                
-
-                <div class="form-group">
-                    <label>Est Gardien</label>
-                    <select name="estGardien" class="form-control" id="estGardienSelect">
-                        <option value="0">Non</option>
-                        <option value="1">Oui</option>
-                    </select>
-                </div>
-                
-
-                <div class="criterePhysiqueGardienFields" style="display: none;">
-                    @php
-                        $critere = $criterePhysiqueGardien;
-                        $attributs = [
-                            'saut' => ['label' => 'Saut', 'min' => 1, 'max' => 100],
-                            'plongeon' => ['label' => 'Plongeon', 'min' => 1, 'max' => 100],
-                            'arret' => ['label' => 'Arrêt', 'min' => 1, 'max' => 100],
-                            'degageemnt' => ['label' => 'Dégageemnt', 'min' => 1, 'max' => 100],
-                            'placement' => ['label' => 'Placement', 'min' => 1, 'max' => 100],
-                            'reflex' => ['label' => 'Réflexe', 'min' => 1, 'max' => 100],
-                        ];
-                    @endphp
-                    @foreach ($attributs as $nomAttribut => $infosAttribut)
-                        <div class="form-group">
-                            <label>{{ $infosAttribut['label'] }}</label>
-                            <input type="number" name="{{ $nomAttribut }}" class="form-control" min="{{ $infosAttribut['min'] }}" max="{{ $infosAttribut['max'] }}" value="{{ old($nomAttribut, $critere->$nomAttribut ?? '') }}">
+                <div class="card mt-2">
+                    {{-- prenom et nom  --}}
+                    <div class="row">
+                        {{-- prneom joueur  --}}
+                        <div class="col">
+                            <div class="form-group">
+                                <x-input-form-crud name="prenomJoueur" label="Prénom" type="text" placeholder="Saisir votre prénom" />
+                            </div>
+                          
                         </div>
-                    @endforeach
+                        {{-- nom joueur  --}}
+                        <div class="col">
+                            <div class="form-group">
+                                <x-input-form-crud name="nomJoueur" label="Nom" type="text" placeholder="Saisir votre nom"/>
+                            </div>
+                        </div>
+                    </div>
+    
+                    {{-- dateNaissance, lieu naiss, adressse  --}}
+                    <div class="row">
+                        <div class="col">
+                            {{-- dateNaissance --}}
+                            <div class="form-group">
+                                <x-input-form-crud name="dateNaissance" label="Date de naissance" type="date" placeholder=""/>
+                            </div>
+                        
+                        </div>
+                        {{-- lieuNaissance --}}
+                        <div class="col">
+                            <div class="form-group">
+                                <x-input-form-crud name="lieuNaissance" label="Lieu de naissance" type="text" placeholder="Saisir votre lieu de naissance"/>
+                            </div>
+    
+                        </div>
+                        {{-- adresse  --}}
+                        <div class="col">
+                            <div class="form-group">                                
+                                <x-input-form-crud name="adresseJoueur" label="Adresse" type="text" placeholder="saisir l'adresse du joueur"/>
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                    {{-- mail, poste, est gardien --}}
+                    <div class="row">
+                        {{-- mail joueur --}}
+                        <div class="col">
+                            <div class="form-group">
+                                <x-input-form-crud name="mailJoueur" label="Email" type="text" placeholder=""/>
+                            </div>
+                        </div>
+
+                        {{-- poste et est validé  --}}
+                        <div class="col">
+                            <div class="row">
+                                {{-- poste  --}}
+                                <div class="col">
+                                            
+                                    <x-my-select value="" :options="[
+                                        ['value' => 'DC', 'label' => 'Défenseur Central'],
+                                        ['value' => 'DLD', 'label' => 'Défenseur Latéral Droit'],
+                                        ['value' => 'DLG', 'label' => 'Défenseur Latéral Gauche'],
+                                        ['value' => 'MC', 'label' => 'Milieu Central'],
+                                        ['value' => 'MD', 'label' => 'Milieu Droit'],
+                                        ['value' => 'MG', 'label' => 'Milieu Gauche'],
+                                        ['value' => 'MO', 'label' => 'Milieu Offensif'],
+                                        ['value' => 'MOC', 'label' => 'Milieu Offensif Central'],
+                                        ['value' => 'AG', 'label' => 'Attaquant Gauche'],
+                                        ['value' => 'AD', 'label' => 'Attaquant Droit'],
+                                        ['value' => 'AP', 'label' => 'Attaquant Pointe'],
+                                        ['value' => 'G', 'label' => 'Gardien']
+                                    ]" 
+                                    label="Poste" name="poste"></x-my-select>
+                                    @error('poste')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+    
+                                {{-- est validé --}}
+                                <div class="col">
+                                    <x-my-select value="" :options="[
+                                        ['value' => '0', 'label' => 'NON'],
+                                        ['value' => '1', 'label' => 'OUI'],
+                                        
+                                    ]" 
+                                    label="Est validé" name="estValide"></x-my-select>
+                                    @error('estValide')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                    @enderror
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="criterePhysiqueJoueurFields">
-                    @php
-                        $critere = $criterePhysiqueJoueur;
-                        $attributs = [
-                            'vitesse' => ['label' => 'Vitesse', 'min' => 1, 'max' => 100],
-                            'puissance' => ['label' => 'Puissance', 'min' => 1, 'max' => 100],
-                            'endurance' => ['label' => 'Endurance', 'min' => 1, 'max' => 100],
-                            'taille' => ['label' => 'Taille', 'min' => 0, 'max' => 999],
-                            'controle' => ['label' => 'Contrôle', 'min' => 1, 'max' => 100],
-                            'passe' => ['label' => 'Passe', 'min' => 1, 'max' => 100],
-                            'tir' => ['label' => 'Tir', 'min' => 1, 'max' => 100],
-                            'dribble' => ['label' => 'Dribble', 'min' => 1, 'max' => 100],
-                            'tete' => ['label' => 'Tête', 'min' => 1, 'max' => 100],
-                            // 'piedFort' => ['label' => 'Pied Fort', 'min' => 1, 'max' => 100],
-                            'piedGauche' => ['label' => 'Pied Gauche', 'min' => 1, 'max' => 100],
-                            'piedDroit' => ['label' => 'Pied Droit', 'min' => 1, 'max' => 100],
-                        ];
-                    @endphp
+                {{-- centre et gariden? --}}
+                <div class="card mt-3 py-1">
+                    <div class="row">
+                        {{-- centre formation --}}
+                        <div class="col">
+                            @php
+                            $optionsCentres = [];
+    
+                            foreach ($centresFormation as $centre) {
+                                $optionsCentres[] = [
+                                    'value' => $centre->id,
+                                    'label' => $centre->nomCentre,
+                                ];
+                            }
+                            @endphp
+    
+                            <x-my-select value="" :options="$optionsCentres" label="Centre de formation" name="centre_formation_id">
+                            </x-my-select>
+                        </div>
+    
+                        {{-- est gardien --}}
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Est Gardien</label>
+                                <select name="estGardien" class="form-control" id="estGardienSelect">
+                                    <option value="0">Non</option>
+                                    <option value="1">Oui</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                    </div>                
+                    
+                </div>                
 
-                    @foreach ($attributs as $nomAttribut => $infosAttribut)
-                    <div class="form-group">
-                        <label>{{ $infosAttribut['label'] }}</label>
-                        <input type="number" name="{{ $nomAttribut }}" class="form-control" min="{{ $infosAttribut['min'] }}" max="{{ $infosAttribut['max'] }}" value="{{ old($nomAttribut, $critere->$nomAttribut ?? '') }}">
+                <hr>
+                <h4>Critere Physique </h4>
+                <div class="card">
+
+                    <div class="criterePhysiqueGardienFields" style="display: none;">
+                        @php
+                            $critere = $criterePhysiqueGardien;
+                            $attributs = [
+                                'saut' => ['label' => 'Saut', 'min' => 1, 'max' => 100],
+                                'plongeon' => ['label' => 'Plongeon', 'min' => 1, 'max' => 100],
+                                'arret' => ['label' => 'Arrêt', 'min' => 1, 'max' => 100],
+                                'degageemnt' => ['label' => 'Dégageemnt', 'min' => 1, 'max' => 100],
+                                'placement' => ['label' => 'Placement', 'min' => 1, 'max' => 100],
+                                'reflex' => ['label' => 'Réflexe', 'min' => 1, 'max' => 100],
+                            ];
+                        @endphp
+                        @foreach ($attributs as $nomAttribut => $infosAttribut)
+                            <div style="max-width: 250px;">
+                                <div class="form-group">
+                                    <x-input-form-crud name="{{$nomAttribut}}" label="{{ $infosAttribut['label'] }}" type="number" placeholder=""/>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                    <div class="form-group">
-                        <label>Pied fort</label>
-                        <select name="piedFort" class="form-control">
-                            <option value="Droit">droite</option>
-                            <option value="Gauche">gauche</option>
-                        </select>
+    
+                    <div class="criterePhysiqueJoueurFields">
+                       
+                        <div style="display: flex; flex-direction : row; flex-wrap : wrap; justify-content : space-between;">
+                            @php
+                                $critere = $criterePhysiqueJoueur;
+                                $attributs = [
+                                    'vitesse' => ['label' => 'Vitesse', 'min' => 1, 'max' => 100],
+                                    'puissance' => ['label' => 'Puissance', 'min' => 1, 'max' => 100],
+                                    'endurance' => ['label' => 'Endurance', 'min' => 1, 'max' => 100],
+                                    'taille' => ['label' => 'Taille', 'min' => 0, 'max' => 999],
+                                    'controle' => ['label' => 'Contrôle', 'min' => 1, 'max' => 100],
+                                    'passe' => ['label' => 'Passe', 'min' => 1, 'max' => 100],
+                                    'tir' => ['label' => 'Tir', 'min' => 1, 'max' => 100],
+                                    'dribble' => ['label' => 'Dribble', 'min' => 1, 'max' => 100],
+                                    'tete' => ['label' => 'Tête', 'min' => 1, 'max' => 100],
+                                    'piedGauche' => ['label' => 'Pied Gauche', 'min' => 1, 'max' => 100],
+                                    'piedDroit' => ['label' => 'Pied Droit', 'min' => 1, 'max' => 100],
+                                ];
+                            @endphp
+                        
+                            @foreach ($attributs as $nomAttribut => $infosAttribut)
+                                <div style="max-width: 250px;">
+                                    <div class="form-group">
+                                        <x-input-form-crud name="{{$nomAttribut}}" label="{{ $infosAttribut['label'] }}" type="number" placeholder=""/>
+                                    </div>
+                                </div>
+                            @endforeach
+                        
+                            {{-- pied fort --}}
+                            <div style="width : 100px" >
+                                
+                                <x-my-select value="" :options="[
+                                        ['value' => 'Droit', 'label' => 'Droite'],
+                                        ['value' => 'Gauche', 'label' => 'Gauche'],
+                                        
+                                    ]" 
+                                    label="Pied fort" name="piedFort"></x-my-select>
+                                    @error('estValide')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                    @enderror
+                            </div>
+                            
+                            </div>
+                            
+                           
+                        </div>
+                        
+    
                     </div>
 
                 </div>
+
 
              
-
                 
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
+                <div style="text-align: right;">
+                    
+                    <button type="submit" class="btn m-3" style="background-color: #124158; color : white;">
+                        <i class="bi bi-check-all"></i>
+                        Enregistrer</button>
+
+                </div>
+                
             </div>
         </form>
     </div>
@@ -212,8 +261,13 @@
             // Appel initial pour afficher les champs appropriés en fonction de la valeur sélectionnée
             toggleCriterePhysiqueFields();
         });
+        
+
     </script>
 
+    
+      
+      
     @endsection
 
     {{-- @if ($joueur->estGardien)
