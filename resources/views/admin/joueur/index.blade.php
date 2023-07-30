@@ -46,12 +46,12 @@
             @endforeach
         </table> --}}
 
-        <div class="table-responsive mdtableListe ">
-            <table class="table table-bordered align-middle mb-0">
-                <tr class="mb-5">
+        <div class="table-responsive ">
+            <table class="table-responsive align-middle mb-0 mdTableListe">
+                <tr>
                     <th class="mdthListe">prenom & nom</th>
                     <th class="mdthListe">
-                        <i class="bi bi-envelope">Email
+                        <i class="bi bi-envelope"></i>Email
                     </th>
                     <th class="mdthListe">Poste</th>
                     <th class="mdthListe">Est Valide</th>

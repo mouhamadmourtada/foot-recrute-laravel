@@ -43,14 +43,41 @@ class LoginRequest extends FormRequest
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
-
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
 
+        // Récupère l'utilisateur authentifié
+        $user = Auth::user();
+
+        // Vérifie si l'utilisateur a le rôle "admin"
+        if ($user->role !== 'admin') {
+            // L'utilisateur n'a pas le rôle "admin", donc l'authentification échoue
+            Auth::logout();
+            RateLimiter::hit($this->throttleKey());
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
+
+        // L'authentification a réussi pour un utilisateur avec le rôle "admin"
         RateLimiter::clear($this->throttleKey());
     }
+    // public function authenticate(): void
+    // {
+    //     $this->ensureIsNotRateLimited();
+
+    //     if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+    //         RateLimiter::hit($this->throttleKey());
+
+    //         throw ValidationException::withMessages([
+    //             'email' => trans('auth.failed'),
+    //         ]);
+    //     }
+
+    //     RateLimiter::clear($this->throttleKey());
+    // }
 
     /**
      * Ensure the login request is not rate limited.

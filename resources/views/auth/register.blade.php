@@ -6,22 +6,15 @@
       
 
         <!-- Name -->
-        <x-md-input name="name" label="nom" type="text"/>
+        {{-- <x-md-input name="name" label="nom" type="text"/> --}}
 
-        {{-- <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div> --}}
+       
+         <!-- prenom -->
+         <x-md-input name="prenom" label="Prenom" type="text"/>
 
         <!-- Email Address -->
         <x-md-input name="email" label="Email" type="text"/>
 
-        {{-- <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div> --}}
 
         <!-- Password -->
         <x-md-input name="password" label="Mot de passe" type="password"/>
