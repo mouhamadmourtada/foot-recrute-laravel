@@ -5,8 +5,8 @@
       <img src="{{asset('assets/images/pToSend.jpg')}}" class="card-img pp_gauche" alt="...">
       <div class="card-body p-0 info_user">
           <p  class="username">
-            <span class="prenom_user">Mouhamad Mourtada</span>
-            <span class="nom_user">DIOP</span>
+            <span class="prenom_user">{{ Auth::user()->prenom }}</span>
+            <span class="nom_user">{{ Auth::user()->nom }}</span>
           </p>
           <p  class="card-text type_compte">Compte admin</p>
           

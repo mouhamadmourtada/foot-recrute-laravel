@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'recruteur' => [
+            'driver' => 'jwt',
+            'provider' => 'recruteurs',
+        ],
+        'joueur' => [
+            'driver' => 'jwt',
+            'provider' => 'joueurs',
+        ]
     ],
 
     /*
@@ -63,6 +71,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'recruteurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Recruteur::class,
+        ],
+        'joueurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Joueur::class,
         ],
 
         // 'users' => [

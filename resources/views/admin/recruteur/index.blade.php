@@ -10,47 +10,14 @@
             </div>
         @endif
 
-        
+
         <x-indique-add :sectionTitle="'Liste des recruteurs'" :route="route('admin.recruteur.create')" :buttonText="'Nouveau'" :title="'ajouter un nouveau recruteur'"/>
 
 
-        {{-- <table class="table table-bordered">
-            <tr>
-                <th class="mdthListe">Nom du Recruteur</th>
-                <th>Prénom du Recruteur</th>
-                <th>Adresse du Recruteur</th>
-                <th>Email du Recruteur</th>
-                <th>Prestige</th>
-                <th>Valide</th>
-                <th>État</th>
-                <th>Structure</th>
-                <th width="280px">Action</th>
-            </tr>
-            @foreach ($recruteurs as $recruteur)
-                <tr>
-                    <td>{{ $recruteur->nomRecruteur }}</td>
-                    <td>{{ $recruteur->prenomRecruteur }}</td>
-                    <td>{{ $recruteur->adresseRecruteur }}</td>
-                    <td>{{ $recruteur->mailRecruteur }}</td>
-                    <td>{{ $recruteur->prestige }}</td>
-                    <td>{{ $recruteur->estValide ? 'Oui' : 'Non' }}</td>
-                    <td>{{ $recruteur->etat }}</td>
-                    <td>{{ $recruteur->structure }}</td>
-                    <td>
-                        <form action="{{ route('admin.recruteur.destroy', $recruteur->id) }}" method="POST">
-                            <a class="btn btn-primary" href="{{ route('admin.recruteur.edit', $recruteur->id) }}">Edit</a>
-                            <a class="btn btn-primary" href="{{ route('admin.recruteur.show', $recruteur->id) }}">View</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </table> --}}
+
         <div class="table-responsive">
-            <table class="table table-bordered align-middle mb-0">
-                <tr class="mb-5">
+            <table class="table-responsive align-middle mb-0 mdTableListe">
+                <tr >
                     <th class="mdthListe">prenom & nom</th>
                     <th class="mdthListe">Adresse</th>
                     <th class="mdthListe">Email</th>
@@ -73,9 +40,9 @@
                         </div>
                     </td>
                     <td>{{ $recruteur->adresseRecruteur }}</td>
-                    <td>{{ $recruteur->mailRecruteur }}</td>
+                    <td>{{ $recruteur->email }}</td>
                     <td>{{ $recruteur->prestige }}</td>
-                    <td>{{ $recruteur->estValide ? 'Oui' : 'Non' }}</td>
+                    <td>{{ $recruteur->isValidated ? 'Oui' : 'Non' }}</td>
                     <td>{{ $recruteur->etat }}</td>
                     <td>{{ $recruteur->structure }}</td>
                     <td class="thAction">
@@ -94,8 +61,8 @@
                 @endforeach
             </table>
         </div>
-        
-        
+
+
 
         {!! $recruteurs->links() !!}
     </div>

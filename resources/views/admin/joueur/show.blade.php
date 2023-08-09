@@ -14,7 +14,7 @@
                 </ol>
             </nav>
             <!-- /Breadcrumb -->
-    
+
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
                     {{-- profil etc... --}}
@@ -39,7 +39,7 @@
                                             Joueur
                                         <?php endif; ?>
                                     </p>
-                                    
+
                                     <p class="text-center" class="text-muted font-size-sm">{{$joueur->adresseJoueur}}</p>
                                     <button class="btn btn-primary">Follow</button>
                                     <button class="btn btn-outline-primary">Message</button>
@@ -89,7 +89,7 @@
                                     pointHoverBorderColor: 'rgb(255, 99, 132)'
                                 }]
                             };
-    
+
                             const config = {
                                 type: 'radar',
                                 data: data,
@@ -113,7 +113,7 @@
                                     maintainAspectRatio: false
                                 }
                             };
-    
+
                             const radarChart = new Chart(document.getElementById('radar-chart'), config);
                         </script>
                     </div>
@@ -127,7 +127,7 @@
                                 <p class="mb-0 text-center">{{$joueur->centreFormation->nomCentre}}</p>
                                 {{-- <span class="small text-uppercase text-muted">CEO - Founder</span> --}}
                                 <div class="row border-bottom pt-2 small">
-                                    
+
                                     {{-- <div class="col-sm-5">
                                         <p class="mb-0">Nom</p>
                                     </div>
@@ -159,7 +159,7 @@
 
                     </div>
                 </div>
-    
+
                 {{-- partie droite --}}
                 <div class="col-md-8">
 
@@ -171,10 +171,10 @@
                                     <p class="mb-0">Email</p>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{$joueur->mailJoueur}}
+                                    {{$joueur->email}}
                                 </div>
                             </div>
-                            
+
                             <div class="row border-bottom pt-2">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Lieu naissance</p>
@@ -212,13 +212,13 @@
                                     <p class="mb-0">Validé</p>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <?php if ($joueur->estValide): ?>
+                                    <?php if ($joueur->isValidated): ?>
                                         <span class="" style="background-color: green; color: white; padding: 2px 10px; border-radius: 6px; font-size: 10px">OUI</span>
                                     <?php else: ?>
                                         <span class="" style="background-color: red; color: white; padding: 2px 10px; border-radius: 6px; font-size: 10px">NON</span>
                                     <?php endif; ?>
                                 </div>
-                                
+
                             </div>
                             <div class="row mt-3">
                                 <div class="col-sm-12">
@@ -249,7 +249,7 @@
                               <div class="progress mb-3" style="height: 5px">
                                 <div class="progress-bar bg-primary" role="progressbar" style="width: {{$criterePhysique->endurance}}%" aria-valuenow="{{$criterePhysique->endurance}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                            
+
                               <small>Contrôle</small>
                               <div class="progress mb-3" style="height: 5px">
                                 <div class="progress-bar bg-primary" role="progressbar" style="width: {{$criterePhysique->controle}}%" aria-valuenow="{{$criterePhysique->controle}}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -266,8 +266,8 @@
                               <div class="progress mb-3" style="height: 5px">
                                 <div class="progress-bar bg-primary" role="progressbar" style="width: {{$criterePhysique->piedDroit}}%" aria-valuenow="{{$criterePhysique->piedDroit}}" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-    
-    
+
+
                               <small>Dribble</small>
                               <div class="progress mb-3" style="height: 5px">
                                 <div class="progress-bar bg-primary" role="progressbar" style="width: {{$criterePhysique->dribble}}%" aria-valuenow="{{$criterePhysique->dribble}}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -310,14 +310,14 @@
                                     {{$criterePhysique->poids}} kg
                                 </div>
                             </div>
-                            
-    
+
+
                             </div>
                           </div>
                         </div>
-    
-                      
-                       
+
+
+
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
@@ -326,7 +326,7 @@
 
                                     @if ($joueur->recruteurs->count() > 0)
                                         @foreach ($joueur->recruteurs as $recruteur)
-                                          
+
                                             <div class="d-flex align-items-center flex-wrap" style="flex-wrap: nowrap">
                                                 <a href="{{ route('admin.recruteur.show', $recruteur->id) }}">
                                                     <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 80px; height: 80px" class="rounded-circle">
@@ -337,7 +337,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        
+
                                     @endif
 
 
@@ -345,11 +345,11 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </div>
