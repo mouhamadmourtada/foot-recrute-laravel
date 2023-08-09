@@ -20,11 +20,11 @@
                         <p><strong>Nom du Recruteur:</strong> {{ $recruteur->nomRecruteur }}</p>
                         <p><strong>Prénom du Recruteur:</strong> {{ $recruteur->prenomRecruteur }}</p>
                         <p><strong><i class="bi bi-geo-alt"></i>Adresse du Recruteur:</strong> {{ $recruteur->adresseRecruteur }}</p>
-                        <p><strong><i class="bi bi-envelope-check"></i>Email du Recruteur:</strong> {{ $recruteur->mailRecruteur }}</p>
+                        <p><strong><i class="bi bi-envelope-check"></i>Email du Recruteur:</strong> {{ $recruteur->email }}</p>
                         <p><strong>Prestige:</strong> {{ $recruteur->prestige }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Valide:</strong> {{ $recruteur->estValide ? 'Oui' : 'Non' }}</p>
+                        <p><strong>Valide:</strong> {{ $recruteur->isValidated ? 'Oui' : 'Non' }}</p>
                         <p><strong>État:</strong> {{ $recruteur->etat }}</p>
                         <p><strong>Structure:</strong> {{ $recruteur->structure }}</p>
                         <p><strong><i class="bi bi-calendar"></i>Date de Création:</strong> {{ $recruteur->created_at }}</p>

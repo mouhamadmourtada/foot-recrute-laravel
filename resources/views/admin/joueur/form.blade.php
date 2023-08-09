@@ -10,7 +10,7 @@
             @method("post")
             <div class="row">
                 <div class="col-6">
-                    @include('shared.input', ['type'=> "text", "name"=>"mailJoueur", "label"=>"email", "class"=>"col", "value" =>$joueur->emailJoueur])
+                    @include('shared.input', ['type'=> "text", "name"=>"email", "label"=>"email", "class"=>"col", "value" =>$joueur->email])
 
                 </div>
                 <div class="col-6">
@@ -23,6 +23,6 @@
 
             <button class="btn btn-primary">créer un joueur</button>
         </form>
-       
+
     </div>
 @endsection

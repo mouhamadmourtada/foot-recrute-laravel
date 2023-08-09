@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
+            $table->dropColumn('name');
             $table->string('prenom');
             $table->string('nom');
             $table->boolean('isValidated');
@@ -29,6 +30,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
+            $table->string('name');
             $table->dropColumn('prenom');
             $table->dropColumn('nom');
             $table->dropColumn('isValidated');

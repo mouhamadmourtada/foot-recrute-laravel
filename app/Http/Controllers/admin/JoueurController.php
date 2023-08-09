@@ -4,10 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\Joueur;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\JoueurRegisterRequest;
 use App\Models\CentreFormation;
 use App\Models\criterePhysiqueGardien;
 use App\Models\criterePhysiqueJoueur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class JoueurController extends Controller
 {
@@ -32,7 +35,7 @@ class JoueurController extends Controller
         $centresFormation = CentreFormation::all();
         $criterePhysiqueJoueur = new criterePhysiqueJoueur();
         $criterePhysiqueGardien = new criterePhysiqueGardien();
-        
+
         return view('admin.joueur.create', compact('centresFormation', 'criterePhysiqueJoueur', 'criterePhysiqueGardien'));
     }
 
@@ -42,34 +45,26 @@ class JoueurController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JoueurRegisterRequest $request)
     {
-        $request->validate([
-            'mailJoueur' => 'required|unique:joueurs',
-            'poste' => 'required',
-            'nomJoueur' => 'required',
-            'prenomJoueur' => 'required',
-            'adresseJoueur' => 'required',
-            'estValide' => 'required',
-            'lieuNaissance' => 'required',
-            'dateNaissance' => 'required',
-            'estGardien' => 'required',
-            'centre_formation_id' => 'required|exists:centre_formations,id',
+
+        $data = $request->validated();
+
+        $joueur = Joueur::create([
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'nomJoueur' => $data['nomJoueur'],
+            'prenomJoueur' => $data['prenomJoueur'],
+            'adresseJoueur' => $data['adresseJoueur'],
+            'poste' => $data['poste'],
+            'estGardien' => $data['estGardien'],
+            'centre_formation_id' => $data['centre_formation_id'],
+            'lieuNaissance' => $data['lieuNaissance'],
+            'dateNaissance' => $data['dateNaissance'],
+            'isValidated' => false,
+
         ]);
 
-        $joueur = new Joueur;
-        $joueur->mailJoueur = $request->mailJoueur;
-        $joueur->poste = $request->poste;
-        $joueur->nomJoueur = $request->nomJoueur;
-        $joueur->prenomJoueur = $request->prenomJoueur;
-        $joueur->adresseJoueur = $request->adresseJoueur;
-        $joueur->estValide = $request->estValide;
-        $joueur->lieuNaissance = $request->lieuNaissance;
-        $joueur->dateNaissance = $request->dateNaissance;
-        $joueur->estGardien = $request->estGardien;
-        $joueur->centre_formation_id = $request->centre_formation_id;
-
-        $joueur->save();
 
         if ($joueur->estGardien) {
             $critere = new CriterePhysiqueGardien;
@@ -102,8 +97,8 @@ class JoueurController extends Controller
         return redirect()->route('admin.joueur.index')->with('success', 'Joueur créé avec succès.');
     }
 
-    
-   
+
+
 
     /**
      * Display the specified resource.
@@ -120,7 +115,7 @@ class JoueurController extends Controller
             $criterePhysique = criterePhysiqueGardien::where('joueur_id', $joueur->id)->first();
 
         } else {
-            
+
             $criterePhysique = criterePhysiqueJoueur::where('joueur_id', $joueur->id)->first();
 
         }
@@ -158,23 +153,23 @@ class JoueurController extends Controller
     public function update(Request $request, Joueur $joueur)
     {
         $request->validate([
-            'mailJoueur' => 'required|unique:joueurs,mailJoueur,'.$joueur->id,
+            'email' => 'required|unique:joueurs,email,'.$joueur->id,
             'poste' => 'required',
             'nomJoueur' => 'required',
             'prenomJoueur' => 'required',
             'adresseJoueur' => 'required',
-            'estValide' => 'required',
+            'isValidated' => 'required',
             'lieuNaissance' => 'required',
             'dateNaissance' => 'required',
             'centre_formation_id' => 'required|exists:centre_formations,id',
         ]);
 
-        $joueur->mailJoueur = $request->mailJoueur;
+        $joueur->email = $request->email;
         $joueur->poste = $request->poste;
         $joueur->nomJoueur = $request->nomJoueur;
         $joueur->prenomJoueur = $request->prenomJoueur;
         $joueur->adresseJoueur = $request->adresseJoueur;
-        $joueur->estValide = $request->estValide;
+        $joueur->isValidated = $request->isValidated;
         $joueur->lieuNaissance = $request->lieuNaissance;
         $joueur->dateNaissance = $request->dateNaissance;
         // $joueur->estGardien = $request->estGardien;
@@ -223,7 +218,7 @@ class JoueurController extends Controller
         $joueur->delete();
         return redirect()->route('admin.joueur.index')->with("success", 'joueur supprimé avec succès');
     }
-   
-   
+
+
 }
 

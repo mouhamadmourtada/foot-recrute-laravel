@@ -10,11 +10,11 @@
             </div>
         @endif
 
-        
+
         <x-indique-add :sectionTitle="'Liste des recruteurs'" :route="route('admin.recruteur.create')" :buttonText="'Nouveau'" :title="'ajouter un nouveau recruteur'"/>
 
 
-       
+
         <div class="table-responsive">
             <table class="table-responsive align-middle mb-0 mdTableListe">
                 <tr >
@@ -40,9 +40,9 @@
                         </div>
                     </td>
                     <td>{{ $recruteur->adresseRecruteur }}</td>
-                    <td>{{ $recruteur->mailRecruteur }}</td>
+                    <td>{{ $recruteur->email }}</td>
                     <td>{{ $recruteur->prestige }}</td>
-                    <td>{{ $recruteur->estValide ? 'Oui' : 'Non' }}</td>
+                    <td>{{ $recruteur->isValidated ? 'Oui' : 'Non' }}</td>
                     <td>{{ $recruteur->etat }}</td>
                     <td>{{ $recruteur->structure }}</td>
                     <td class="thAction">
@@ -61,8 +61,8 @@
                 @endforeach
             </table>
         </div>
-        
-        
+
+
 
         {!! $recruteurs->links() !!}
     </div>

@@ -9,6 +9,7 @@ class criterePhysiqueGardien extends criterePhysique
 {
     use HasFactory;
 
+    
     public function joueur()
     {
         return $this->belongsTo(Joueur::class);

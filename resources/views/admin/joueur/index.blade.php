@@ -8,43 +8,9 @@
         </div>
         @endif
 
-       
+
         <x-indique-add :sectionTitle="'Liste des joueurs'" :route="route('admin.joueur.create')" :buttonText="'Nouveau'" :title="'ajouter un nouveau joueur'"/>
 
-          
-
-        {{-- <table class="table table-bordered">
-            <tr>
-                <th>S.No</th>
-                <th>Nom du Joueur</th>
-                <th>Mail du Joueur</th>
-                <th>Poste</th>
-                <th>Est Valide</th>
-                <th>Lieu de Naissance</th>
-                <th>Date de Naissance</th>
-                <th width="280px">Action</th>
-            </tr>
-            @foreach ($joueurs as $joueur)
-            <tr>
-                <td>{{ $joueur->id }}</td>
-                <td>{{ $joueur->nomJoueur }}</td>
-                <td>{{ $joueur->mailJoueur }}</td>
-                <td>{{ $joueur->poste }}</td>
-                <td>{{ $joueur->estValide ? 'Oui' : 'Non' }}</td>
-                <td>{{ $joueur->lieuNaissance }}</td>
-                <td>{{ $joueur->dateNaissance }}</td>
-                <td>
-                    <form action="{{ route('admin.joueur.destroy', $joueur->id) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('admin.joueur.edit', $joueur->id) }}">Edit</a>
-                        <a class="btn btn-primary" href="{{ route('admin.joueur.show', $joueur->id) }}">view</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </table> --}}
 
         <div class="table-responsive ">
             <table class="table-responsive align-middle mb-0 mdTableListe">
@@ -76,9 +42,9 @@
                                     </div>
                             </div>
                         </td>
-                        <td>{{ $joueur->mailJoueur }}</td>
+                        <td>{{ $joueur->email }}</td>
                         <td>{{ $joueur->poste }}</td>
-                        <td>{{ $joueur->estValide ? 'Oui' : 'Non' }}</td>
+                        <td>{{ $joueur->isValidated ? 'Oui' : 'Non' }}</td>
                         <td>{{ $joueur->lieuNaissance }}</td>
                         <td>{{ $joueur->dateNaissance }}</td>
                         <td class="thAction">
@@ -97,7 +63,7 @@
                 @endforeach
             </table>
         </div>
-        
+
 
         {!! $joueurs->links() !!}
     </div>

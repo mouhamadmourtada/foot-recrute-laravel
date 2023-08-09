@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\RecruteurRegisterRequest;
 use App\Models\Recruteur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class RecruteurController extends Controller
 {
@@ -35,29 +38,20 @@ class RecruteurController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RecruteurRegisterRequest $request)
     {
-        $request->validate([
-            'nomRecruteur' => 'required',
-            'prenomRecruteur' => 'required',
-            'adresseRecruteur' => 'required',
-            'mailRecruteur' => 'required',
-            'prestige' => 'required|numeric|min:1|max:10',
-            'estValide' => 'required|boolean',
-            'etat' => 'required|in:actif,inactif',
-            'structure' => 'required',
+        $data = $request->validated();
+        $recruteur = Recruteur::create([
+            'nomRecruteur' => $data['nomRecruteur'],
+            'prenomRecruteur' => $data['prenomRecruteur'],
+            'adresseRecruteur' => $data['adresseRecruteur'],
+            'prestige' => $data['prestige'],
+            'etat' => "actif",
+            'structure' => $data['structure'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'isValidated' => false,
         ]);
-
-        $recruteur = new Recruteur;
-        $recruteur->nomRecruteur = $request->nomRecruteur;
-        $recruteur->prenomRecruteur = $request->prenomRecruteur;
-        $recruteur->adresseRecruteur = $request->adresseRecruteur;
-        $recruteur->mailRecruteur = $request->mailRecruteur;
-        $recruteur->prestige = $request->prestige;
-        $recruteur->estValide = $request->estValide;
-        $recruteur->etat = $request->etat;
-        $recruteur->structure = $request->structure;
-        $recruteur->save();
 
         return redirect()->route('admin.recruteur.index')
             ->with('success', 'Recruteur créé avec succès.');
@@ -98,9 +92,9 @@ class RecruteurController extends Controller
             'nomRecruteur' => 'required',
             'prenomRecruteur' => 'required',
             'adresseRecruteur' => 'required',
-            'mailRecruteur' => 'required',
+            'email' => 'required',
             'prestige' => 'required|numeric|min:1|max:10',
-            'estValide' => 'required|boolean',
+            'isValidated' => 'required|boolean',
             'etat' => 'required|in:actif,inactif',
             'structure' => 'required',
         ]);
@@ -108,9 +102,9 @@ class RecruteurController extends Controller
         $recruteur->nomRecruteur = $request->nomRecruteur;
         $recruteur->prenomRecruteur = $request->prenomRecruteur;
         $recruteur->adresseRecruteur = $request->adresseRecruteur;
-        $recruteur->mailRecruteur = $request->mailRecruteur;
+        $recruteur->email = $request->email;
         $recruteur->prestige = $request->prestige;
-        $recruteur->estValide = $request->estValide;
+        $recruteur->isValidated = $request->isValidated;
         $recruteur->etat = $request->etat;
         $recruteur->structure = $request->structure;
         $recruteur->save();
